@@ -29,6 +29,7 @@ class MainPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
+    print("createState()");
     return _MainPageState();
   }
 }
@@ -36,13 +37,71 @@ class MainPage extends StatefulWidget {
 // 有状态组件的子一个类 对内
 class _MainPageState extends State<MainPage> {
   @override
+  void initState() {
+    print("initState()");
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    print("didChangeDependencies()");
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(covariant MainPage oldWidget) {
+    print("didUpdateWidget()");
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void deactivate() {
+    print("deactivate() 当statefulWidget从树中暂时移除时调用");
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    print("dispose() 当statefulWidget从树中永久被移除时调用");
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("build()阶段执行");
+
     return MaterialApp(
       title: 'Flutter组件初体验-有状态组件',
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       home: Scaffold(
         appBar: AppBar(title: Text("头部区域")),
-        body: Container(child: Center(child: Text("中部区域"))),
+        body: Container(
+          child: Center(
+            child:
+                // GestureDetector(
+                //   onTap: () {
+                //     print("点击了中间区域");
+                //   },
+                //   onDoubleTap: () {
+                //     print("双击了中间区域");
+                //   },
+                //   onLongPress: () {
+                //     print("长按了中间区域");
+                //   },
+                //   child: Text("中部区域"),
+                // ),
+                Container(
+                  child: Center(
+                    child: TextButton(
+                      onPressed: () {
+                        print("点击了中间区域");
+                      },
+                      child: Text("按钮"),
+                    ),
+                  ),
+                ),
+          ),
+        ),
         bottomNavigationBar: Container(
           height: 80,
           child: Center(child: Text("底部区域")),
