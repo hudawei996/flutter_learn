@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_learn/test.dart';
 
 void main(List<String> args) {
-  runApp(MainPage());
+  // runApp(MainPage());
+  runApp(MainPageTest());
 }
 
 // class MainPage extends StatelessWidget {
