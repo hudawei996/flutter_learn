@@ -1,14 +1,33 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learn/test.dart';
 
 import 'd2_31_father_child.dart';
 import 'd2_32_child_father.dart';
+import 'd2_3456_dio_use.dart';
+import 'd2_37_route.dart';
 
 void main(List<String> args) {
   // runApp(MainPage());
   // runApp(MainPageTest());
   // runApp(MainPageFatherChild());
-  runApp(MainPageChildFather());
+  // runApp(MainPageChildFather());
+
+  // 直接使用，不封装
+  // Dio()
+  //     .get("https://geek.itheima.net/v1_0/channels")
+  //     .then((value) {
+  //       print(value.data);
+  //     })
+  //     .catchError((error) {
+  //       print("$error");
+  //     });
+  // 封装一下使用
+  // runApp(MainPageDio());
+
+  runApp(MainPageRoute());
+
+
 }
 
 // class MainPage extends StatelessWidget {
