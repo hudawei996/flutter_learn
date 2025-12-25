@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learn/test.dart';
 
+import 'd2_31_father_child.dart';
+import 'd2_32_child_father.dart';
+
 void main(List<String> args) {
   // runApp(MainPage());
-  runApp(MainPageTest());
+  // runApp(MainPageTest());
+  // runApp(MainPageFatherChild());
+  runApp(MainPageChildFather());
 }
 
 // class MainPage extends StatelessWidget {
