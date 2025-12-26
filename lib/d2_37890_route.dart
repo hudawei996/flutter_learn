@@ -57,7 +57,7 @@ class _ListPageState extends State<ListPage> {
               //   ),
               // );
 
-              /// 写法二：
+              /// 写法二：用页面传参
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(
@@ -75,7 +75,7 @@ class _ListPageState extends State<ListPage> {
               //   ),
               // );
               
-              /// 写法三：注册路由表之后
+              /// 写法三：注册路由表之后，使用arguments传参
               Navigator.pushNamed(context, "/detail", arguments: {"index": index});
 
             },
@@ -111,7 +111,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     super.initState();
-    /// 微任务接收
+    /// 异步微任务接收
     Future.microtask((){
       if(ModalRoute.of(context) != null){
         print("获取到路由参数");

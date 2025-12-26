@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_learn/test.dart';
+import 'package:flutter_learn/test_main.dart';
 
 import 'd2_31_father_child.dart';
 import 'd2_32_child_father.dart';
 import 'd2_3456_dio_use.dart';
-import 'd2_37_route.dart';
+import 'd2_37890_route.dart';
+import 'd2_412_route_senior.dart';
 
 void main(List<String> args) {
   // runApp(MainPage());
@@ -25,7 +26,8 @@ void main(List<String> args) {
   // 封装一下使用
   // runApp(MainPageDio());
 
-  runApp(MainPageRoute());
+  // runApp(MainPageRoute());
+  runApp(MainPageRouteSenior());
 
 
 }
