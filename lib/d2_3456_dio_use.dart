@@ -36,8 +36,8 @@ class _MainPageDioState extends State<MainPageDio> {
               child: Container(
                 alignment: Alignment.center,
                 child:
-                // ChannelItem(_channelsList[index]),
-                ChannelItem(channelItem:_channelsList[index]),
+                    // ChannelItem(_channelsList[index]),
+                    ChannelItem(channelItem: _channelsList[index]),
               ),
             );
           }),
@@ -72,9 +72,8 @@ class _MainPageDioState extends State<MainPageDio> {
 
         /// cast方法青汁转化列表项的数据类型
         // _channelsList = (res['data']['channels'] as List).cast<Map<String,dynamic>>() as List<Map<String,dynamic>>;
-        _channelsList =
-            (res['data']['channels'] as List)
-                .cast<Map<String, dynamic>>(); // 简写
+        _channelsList = (res['data']['channels'] as List)
+            .cast<Map<String, dynamic>>(); // 简写
 
         setState(() {});
         print("数据: $_channelsList");
@@ -83,6 +82,13 @@ class _MainPageDioState extends State<MainPageDio> {
       }
     } catch (e) {
       print("请求异常: $e");
+    } finally {
+      /// 最好是在这里使用数据更新，
+      /// 而不是在78行处，不判断页面是否挂在，直接更新数据
+      /// 在这里更新数据，即使是错误的，也可以更新显示错误提示
+      if (mounted) {
+        setState(() {});
+      }
     }
   }
 }
