@@ -76,11 +76,6 @@ class _MainPageState extends State<MainPage> {
   }
 
   List<Widget> _getChildren() {
-    return [
-      const Center(child: HomeView()),
-      const Center(child: CategoryView()),
-      const Center(child: CartView()),
-      const Center(child: MineView()),
-    ];
+    return [HomeView(), CategoryView(), CartView(), MineView()];
   }
 }
