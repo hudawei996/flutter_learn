@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_learn/test_main.dart';
+import 'package:flutter_learn/app/routes/index.dart';
+import 'package:flutter_learn/base_learn/test_main.dart';
 
-import 'd2_31_father_child.dart';
-import 'd2_32_child_father.dart';
-import 'd2_3456_dio_use.dart';
-import 'd2_37890_route.dart';
-import 'd2_412_route_senior.dart';
+import 'base_learn/d2_31_father_child.dart';
+import 'base_learn/d2_32_child_father.dart';
+import 'base_learn/d2_3456_dio_use.dart';
+import 'base_learn/d2_37890_route.dart';
+import 'base_learn/d2_412_route_senior.dart';
 
 void main(List<String> args) {
   // runApp(MainPage());
@@ -27,7 +28,12 @@ void main(List<String> args) {
   // runApp(MainPageDio());
 
   // runApp(MainPageRoute());
-  runApp(MainPageRouteSenior());
+  // runApp(MainPageRouteSenior());
+
+
+
+
+  runApp(getRootWidget());
 
 
 }

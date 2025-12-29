@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_learn/d2_33_dio.dart';
+import 'package:flutter_learn/base_learn/d2_33_dio.dart';
 
 class MainPageDio extends StatefulWidget {
   const MainPageDio({super.key});
