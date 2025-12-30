@@ -10,4 +10,5 @@ class GlobalConstants {
 // 接口常量类
 class HttpConstants {
   static const String BANNER_LIST = "/home/banner";// 轮播图接口
+  static const String CATEGORY_LIST = "/home/category/head";// 分类接口
 }

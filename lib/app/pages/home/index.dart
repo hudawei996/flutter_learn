@@ -22,6 +22,7 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
 
     _getBannerList();
+    _getCategoryList();
   }
 
   // final List<BannerItem> _bannerList = [
@@ -58,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
 
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       // 分类组件
-      const SliverToBoxAdapter(child: HmCategory()),
+      SliverToBoxAdapter(child: HmCategory(categoryList: _categoryList)),
 
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       // 推荐商品组件
@@ -88,5 +89,21 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(slivers: _getScrollChildren());
+  }
+
+  List<CategoryItem> _categoryList = [];
+  // Future<void> _getCategoryList() { // 下边的代码没有用await 这里就不用写async
+  //   // 也可以这样写，但是我觉得，上面的写法更清晰
+  //   getCategoryList().then((value) {
+  //     setState(() {
+  //       _categoryList = value;
+  //     });
+  //   });
+  // }
+
+  Future<void> _getCategoryList() async {
+    // 也可以像上边那样写，但是我觉得，这种写法更清晰
+    _categoryList = await getCategoryList();
+    setState(() {});
   }
 }

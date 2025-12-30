@@ -39,8 +39,10 @@ class DioRequest {
     ));
   }
 
+  // 写了两层Future包裹，就会报错
   // Future<Future<dynamic>> get(String url,{Map<String,dynamic>? queryParameters}) async{
   Future<dynamic> get(String url,{Map<String,dynamic>? queryParameters}) async{
+    print("===== get请求 $url");
     return _handlerResponse(_dio.get(url,queryParameters: queryParameters));
   }
 
