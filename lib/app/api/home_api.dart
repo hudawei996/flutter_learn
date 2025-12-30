@@ -20,3 +20,10 @@ Future<List<CategoryItem>> getCategoryList() async {
     return CategoryItem.fromJson(item as Map<String, dynamic>);
   }).toList();
 }
+
+// 特惠推荐数据模型
+Future<SpecialRecommendResult> getPreferenceList() async {
+  return SpecialRecommendResult.fromJson(
+    await dioRequest.get(HttpConstants.PREFERENCE_LIST),
+  );
+}

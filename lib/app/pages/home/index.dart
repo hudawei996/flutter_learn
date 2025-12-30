@@ -23,6 +23,7 @@ class _HomeViewState extends State<HomeView> {
 
     _getBannerList();
     _getCategoryList();
+    _getPreferenceList();
   }
 
   // final List<BannerItem> _bannerList = [
@@ -63,7 +64,7 @@ class _HomeViewState extends State<HomeView> {
 
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       // 推荐商品组件
-      const SliverToBoxAdapter(child: HmSuggestion()),
+      SliverToBoxAdapter(child: HmSuggestion(specialRecommendResult:_specialRecommendResult)),
 
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       // ListView
@@ -104,6 +105,17 @@ class _HomeViewState extends State<HomeView> {
   Future<void> _getCategoryList() async {
     // 也可以像上边那样写，但是我觉得，这种写法更清晰
     _categoryList = await getCategoryList();
+    setState(() {});
+  }
+
+  // 特惠推荐商品列表
+  SpecialRecommendResult _specialRecommendResult = SpecialRecommendResult(
+    id: "",
+    title: "",
+    subTypes: [],
+  );
+  Future<void> _getPreferenceList() async {
+    _specialRecommendResult = await getPreferenceList();
     setState(() {});
   }
 }
