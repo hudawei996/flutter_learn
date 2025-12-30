@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_learn/app/components/home/HmHot.dart';
+import 'package:flutter_learn/app/components/home/HmMoreList.dart';
 import 'package:flutter_learn/app/components/home/HmSlider.dart';
 
 import '../../components/home/HmCategory.dart';
@@ -12,7 +14,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  List<Widget> _getScrollChildre(){
+  List<Widget> _getScrollChildre() {
     return [
       // 轮播图
       const SliverToBoxAdapter(child: HmSlider()),
@@ -25,12 +27,29 @@ class _HomeViewState extends State<HomeView> {
       // 推荐商品组件
       const SliverToBoxAdapter(child: HmSuggestion()),
 
+      const SliverToBoxAdapter(child: SizedBox(height: 10)),
+      // ListView
+      const SliverToBoxAdapter(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Flex(
+            direction: Axis.horizontal,
+            children: [
+              Expanded(child: HmHot()),
+              SizedBox(width: 10),
+              Expanded(child: HmHot()),
+            ],
+          ),
+        ),
+      ),
+
+      const SliverToBoxAdapter(child: SizedBox(height: 10)),
+      const HmMoreList(),
     ];
   }
+
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: _getScrollChildre(),
-    );
+    return CustomScrollView(slivers: _getScrollChildre());
   }
 }

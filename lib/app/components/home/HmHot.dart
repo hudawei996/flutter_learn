@@ -10,6 +10,14 @@ class HmHot extends StatefulWidget {
 class _HmHotState extends State<HmHot> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      height: 200,
+      color: Colors.blue,
+      alignment: Alignment.center,
+      child: Text(
+        "热门商品",
+        style: TextStyle(color: Colors.white, fontSize: 20),
+      ),
+    );
   }
 }

@@ -19,7 +19,8 @@ class _HmCategoryState extends State<HmCategory> {
         itemBuilder: (BuildContext context, int index) {
           return Container(
             color: Colors.blue,
-            margin: const EdgeInsets.all(5),
+            alignment: Alignment.center,
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               "分类$index",
               style: const TextStyle(color: Colors.white, fontSize: 20),

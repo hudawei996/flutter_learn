@@ -10,6 +10,20 @@ class HmMoreList extends StatefulWidget {
 class _HmMoreListState extends State<HmMoreList> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SliverGrid.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+      ),
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          height: 40,
+          color: Colors.blue,
+          alignment: Alignment.center,
+          child: Text("商品$index", style: TextStyle(color: Colors.white)),
+        );
+      },
+    );
   }
 }
