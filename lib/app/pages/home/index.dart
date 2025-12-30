@@ -4,6 +4,7 @@ import 'package:flutter_learn/app/components/home/HmMoreList.dart';
 import 'package:flutter_learn/app/components/home/HmSlider.dart';
 import 'package:flutter_learn/app/view_models/home_models.dart';
 
+import '../../api/home_api.dart';
 import '../../components/home/HmCategory.dart';
 import '../../components/home/HmSuggestion.dart';
 
@@ -15,26 +16,42 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final List<BannerItem> _bannerList = [
-    BannerItem(
-      id: "1",
-      imgUrl: "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg",
-    ),
-    BannerItem(
-      id: "2",
-      imgUrl: "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg",
-    ),
-    BannerItem(
-      id: "3",
-      imgUrl: "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/3.jpg",
-    ),
-  ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    _getBannerList();
+  }
+
+  // final List<BannerItem> _bannerList = [
+  //   BannerItem(
+  //     id: "1",
+  //     imgUrl: "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg",
+  //   ),
+  //   BannerItem(
+  //     id: "2",
+  //     imgUrl: "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg",
+  //   ),
+  //   BannerItem(
+  //     id: "3",
+  //     imgUrl: "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/3.jpg",
+  //   ),
+  // ];
+
+  List<BannerItem> _bannerList = [];
+  void _getBannerList() async {
+    _bannerList = await getBannerList();
+    setState(() {});
+  }
+
+
 
   // https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg
   // https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg
   // https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/3.jpg
 
-  List<Widget> _getScrollChildre() {
+  List<Widget> _getScrollChildren() {
     return [
       // 轮播图
       SliverToBoxAdapter(child: HmSlider(bannerList: _bannerList)),
@@ -70,6 +87,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(slivers: _getScrollChildre());
+    return CustomScrollView(slivers: _getScrollChildren());
   }
 }
