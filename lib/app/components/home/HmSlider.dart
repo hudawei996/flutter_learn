@@ -21,7 +21,7 @@ class _HmSliderState extends State<HmSlider> {
     });
   }
 
-  CarouselSliderController _controller = CarouselSliderController();
+  final CarouselSliderController _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
