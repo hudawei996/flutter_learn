@@ -16,7 +16,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   @override
   void initState() {
     super.initState();
@@ -24,6 +23,8 @@ class _HomeViewState extends State<HomeView> {
     _getBannerList();
     _getCategoryList();
     _getPreferenceList();
+    _getInVogueList();
+    _getOneStopList();
   }
 
   // final List<BannerItem> _bannerList = [
@@ -42,12 +43,11 @@ class _HomeViewState extends State<HomeView> {
   // ];
 
   List<BannerItem> _bannerList = [];
+
   void _getBannerList() async {
     _bannerList = await getBannerList();
     setState(() {});
   }
-
-
 
   // https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg
   // https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg
@@ -64,19 +64,31 @@ class _HomeViewState extends State<HomeView> {
 
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       // 推荐商品组件
-      SliverToBoxAdapter(child: HmSuggestion(specialRecommendResult:_specialRecommendResult)),
+      SliverToBoxAdapter(
+        child: HmSuggestion(specialRecommendResult: _specialRecommendResult),
+      ),
 
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       // ListView
-      const SliverToBoxAdapter(
+      SliverToBoxAdapter(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Flex(
             direction: Axis.horizontal,
             children: [
-              Expanded(child: HmHot()),
+              Expanded(
+                child: HmHot(
+                  recommendResult: _inVogueRecommendResult,
+                  type: "hot",
+                ),
+              ),
               SizedBox(width: 10),
-              Expanded(child: HmHot()),
+              Expanded(
+                child: HmHot(
+                  recommendResult: _oneStopRecommendResult,
+                  type: "step",
+                ),
+              ),
             ],
           ),
         ),
@@ -93,6 +105,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   List<CategoryItem> _categoryList = [];
+
   // Future<void> _getCategoryList() { // 下边的代码没有用await 这里就不用写async
   //   // 也可以这样写，但是我觉得，上面的写法更清晰
   //   getCategoryList().then((value) {
@@ -101,7 +114,6 @@ class _HomeViewState extends State<HomeView> {
   //     });
   //   });
   // }
-
   Future<void> _getCategoryList() async {
     // 也可以像上边那样写，但是我觉得，这种写法更清晰
     _categoryList = await getCategoryList();
@@ -114,8 +126,33 @@ class _HomeViewState extends State<HomeView> {
     title: "",
     subTypes: [],
   );
+
   Future<void> _getPreferenceList() async {
     _specialRecommendResult = await getPreferenceList();
+    setState(() {});
+  }
+
+  // 爆款推荐商品列表
+  SpecialRecommendResult _inVogueRecommendResult = SpecialRecommendResult(
+    id: "",
+    title: "",
+    subTypes: [],
+  );
+
+  Future<void> _getInVogueList() async {
+    _inVogueRecommendResult = await getInVogueList();
+    setState(() {});
+  }
+
+  // 一站买全商品列表
+  SpecialRecommendResult _oneStopRecommendResult = SpecialRecommendResult(
+    id: "",
+    title: "",
+    subTypes: [],
+  );
+
+  Future<void> _getOneStopList() async {
+    _oneStopRecommendResult = await getOneStopList();
     setState(() {});
   }
 }

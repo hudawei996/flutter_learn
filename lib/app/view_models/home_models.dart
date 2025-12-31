@@ -162,3 +162,8 @@ class GoodsItems {
     );
   }
 }
+
+
+// 爆款推荐 类型
+// 根据 爆款推荐.json文件生成对应的类型和工厂转化函数
+// 可以复用 特惠推荐结果类型 SpecialRecommendResult

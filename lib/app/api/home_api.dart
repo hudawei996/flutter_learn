@@ -27,3 +27,17 @@ Future<SpecialRecommendResult> getPreferenceList() async {
     await dioRequest.get(HttpConstants.PREFERENCE_LIST),
   );
 }
+
+// 爆款推荐
+Future<SpecialRecommendResult> getInVogueList() async {
+  return SpecialRecommendResult.fromJson(
+    await dioRequest.get(HttpConstants.IN_VOGUE_LIST),
+  );
+}
+
+// 一站买全
+Future<SpecialRecommendResult> getOneStopList() async {
+  return SpecialRecommendResult.fromJson(
+    await dioRequest.get(HttpConstants.ONE_STOP_LIST),
+  );
+}
