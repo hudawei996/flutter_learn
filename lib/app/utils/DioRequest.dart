@@ -41,9 +41,9 @@ class DioRequest {
   }
 
   // 写了两层Future包裹，就会报错
-  // Future<Future<dynamic>> get(String url,{Map<String,dynamic>? queryParameters}) async{
-  Future<dynamic> get(String url,{Map<String,dynamic>? queryParameters}) async{
-    return _handlerResponse(_dio.get(url,queryParameters: queryParameters));
+  // Future<Future<dynamic>> get(String url,{Map<String,dynamic>? params}) async{
+  Future<dynamic> get(String url,{Map<String,dynamic>? params}) async{
+    return _handlerResponse(_dio.get(url,queryParameters: params));
   }
 
   Future<dynamic> _handlerResponse(Future<Response<dynamic>> task) async{
@@ -52,7 +52,7 @@ class DioRequest {
       final data = response.data as Map<String,dynamic>;
       // 业务状态码 是 "1" ,不是数字 1
       if(data['code'] == GlobalConstants.SUCCESS_CODE){
-        print("===== 加载数据成功 ${data["result"]}");
+        print("===== 加载数据成功🔔🔔 ${data["result"]}");
         return data["result"];
       }
       throw Exception(data['msg'] ?? "加载数据异常");
