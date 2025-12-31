@@ -25,6 +25,21 @@ class _HomeViewState extends State<HomeView> {
     _getPreferenceList();
     _getInVogueList();
     _getOneStopList();
+    _getRecommendList();
+    registerEvent();
+  }
+
+  // 监听滚动到底部的事件
+  void registerEvent() {
+    _scrollController.addListener((){
+      // 距离底部还有50的距离就可以开始了
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 50)
+        {
+          // 加载下一页的数据
+
+        }
+    });
   }
 
   // final List<BannerItem> _bannerList = [
@@ -95,13 +110,18 @@ class _HomeViewState extends State<HomeView> {
       ),
 
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
-      const HmMoreList(),
+      HmMoreList(recommendList: _recommendList), // 无限滚动列表,
     ];
   }
 
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(slivers: _getScrollChildren());
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: _getScrollChildren(),
+    );
   }
 
   List<CategoryItem> _categoryList = [];
@@ -155,4 +175,33 @@ class _HomeViewState extends State<HomeView> {
     _oneStopRecommendResult = await getOneStopList();
     setState(() {});
   }
+
+  // 页码
+  int _page = 1;
+  bool _isLoading = false;
+  bool _hasMore = true;
+  // 推荐列表
+  List<GoodDetailItem> _recommendList = [];
+
+  // 获取推荐列表
+  void _getRecommendList() async {
+    if (_isLoading || !_hasMore) {
+      return;
+    }
+    _isLoading = true;// 先 占住位置
+    int requestLimit = _page * 8;
+    _recommendList = await getRecommendListAPI({"limit": 10});
+    _isLoading = false;// 松开位置
+    setState(() {});
+
+    // 我要10条 你给10条 说明我要的你都给了，结社认为还是有下一页
+    // 我要10条 你给到的少于10 说明没有下一页
+    if (_recommendList.length < requestLimit) {
+      _hasMore = false;
+      return;
+    }
+    _page++;// 自增
+  }
+
+
 }

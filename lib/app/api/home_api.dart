@@ -15,8 +15,8 @@ Future<List<BannerItem>> getBannerList() async {
 
 Future<List<CategoryItem>> getCategoryList() async {
   return ((await dioRequest.get(HttpConstants.CATEGORY_LIST)) as List).map((
-      item,
-      ) {
+    item,
+  ) {
     return CategoryItem.fromJson(item as Map<String, dynamic>);
   }).toList();
 }
@@ -40,4 +40,17 @@ Future<SpecialRecommendResult> getOneStopList() async {
   return SpecialRecommendResult.fromJson(
     await dioRequest.get(HttpConstants.ONE_STOP_LIST),
   );
+}
+
+// 推荐列表
+Future<List<GoodDetailItem>> getRecommendListAPI(
+  Map<String, dynamic> params,
+) async {
+  // 返回请求
+  return ((await dioRequest.get(HttpConstants.RECOMMEND_LIST, params: params))
+          as List)
+      .map((item) {
+        return GoodDetailItem.formJSON(item as Map<String, dynamic>);
+      })
+      .toList();
 }
