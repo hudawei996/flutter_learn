@@ -17,6 +17,11 @@ class HttpConstants {
   static const String RECOMMEND_LIST = "/hot/recommend";// 推荐列表
   static const String GUESS_LIST = "/hot/goods/guessLike";// 猜你喜欢
   // 返回的结构体是，GoodsItems类型
+
+  static const String login = "/login";// 登录接口
 }
 
 
+// 1.请求地址有
+// 2.请求类型是GoodsItems类型 =》 items => List<GoodsItems>
+// 3.HmMoreList要的是 List<GoodDetailItem>类型
