@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_learn/app/stores/UserController.dart';
 import 'package:flutter_learn/app/utils/toast_utils.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 
 import '../../api/user_api.dart';
 import '../../constants/index.dart';
@@ -17,6 +20,8 @@ class _LoginPageState extends State<LoginPage> {
       TextEditingController(); // 账号控制器
   final TextEditingController _codeController =
       TextEditingController(); // 密码控制器
+  final UserController _userController = Get.find<UserController>();
+
   // 用户账号Widget
   Widget _buildPhoneTextField() {
     return TextFormField(
@@ -200,16 +205,17 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _login() async {
-    final Map<String,dynamic> data = {
+    final Map<String, dynamic> data = {
       "account": _phoneController.text,
       "password": _codeController.text,
     };
-    try{
+    try {
       final response = await loginAPI(data);
       print(response);
+      _userController.updateUserInfo(response);
       ToastUtils.showToast(context, "登录成功");
       Navigator.pop(context);
-    }catch(e){
+    } catch (e) {
       ToastUtils.showToast(context, (e as DioException).message ?? "登录异常");
     }
   }

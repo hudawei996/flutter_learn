@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learn/app/components/home/HmMoreList.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../api/mine_api.dart';
 import '../../components/mine/HmGuess.dart';
+import '../../stores/UserController.dart';
 import '../../view_models/home_models.dart';
 
 class MineView extends StatefulWidget {
@@ -13,6 +16,9 @@ class MineView extends StatefulWidget {
 }
 
 class _MineViewState extends State<MineView> {
+  // 引入UserController
+  final UserController _userController = Get.put(UserController());
+
   Widget _buildHeader() {
     return Container(
       decoration: BoxDecoration(
@@ -25,13 +31,21 @@ class _MineViewState extends State<MineView> {
       padding: const EdgeInsets.only(left: 20, right: 40, top: 80, bottom: 20),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 26,
-            backgroundImage: const AssetImage(
-              'lib/app/assets/goods_avatar.png',
-            ),
-            backgroundColor: Colors.white,
-          ),
+          Obx(() {
+            return GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              child: CircleAvatar(
+                radius: 26,
+                backgroundImage: _userController.user.value.avatar.isNotEmpty
+                    ? NetworkImage(_userController.user.value.avatar)
+                    : const AssetImage('lib/app/assets/goods_avatar.png')
+                          as ImageProvider,
+                backgroundColor: Colors.white,
+              ),
+            );
+          }),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -39,12 +53,24 @@ class _MineViewState extends State<MineView> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, '/login');
+                    if (_userController.user.value.id.isEmpty) {
+                      Navigator.pushNamed(context, '/login');
+                    }
                   },
-                  child: const Text(
-                    '立即登录',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                  ),
+                  child: Obx(() {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        (_userController.user.value.account.isNotEmpty
+                            ? _userController.user.value.account
+                            : '立即登录'),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    );
+                  }),
                 ),
               ],
             ),
