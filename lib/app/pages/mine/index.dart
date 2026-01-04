@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_learn/app/components/home/HmMoreList.dart';
+
+import '../../api/mine_api.dart';
+import '../../components/mine/HmGuess.dart';
+import '../../view_models/home_models.dart';
 
 class MineView extends StatefulWidget {
   MineView({Key? key}) : super(key: key);
@@ -22,7 +27,9 @@ class _MineViewState extends State<MineView> {
         children: [
           CircleAvatar(
             radius: 26,
-            backgroundImage: const AssetImage('lib/app/assets/goods_avatar.png'),
+            backgroundImage: const AssetImage(
+              'lib/app/assets/goods_avatar.png',
+            ),
             backgroundColor: Colors.white,
           ),
           const SizedBox(width: 12),
@@ -56,7 +63,11 @@ class _MineViewState extends State<MineView> {
         ),
         child: Row(
           children: [
-            Image.asset("lib/app/assets/ic_user_vip.png", width: 30, height: 30),
+            Image.asset(
+              "lib/app/assets/ic_user_vip.png",
+              width: 30,
+              height: 30,
+            ),
             SizedBox(width: 10),
             Expanded(
               child: Text(
@@ -169,15 +180,72 @@ class _MineViewState extends State<MineView> {
     );
   }
 
+  List<GoodDetailItem> _list = [];
+  Map<String, dynamic> _params = {"page": 1, "pageSize": 10};
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getGuessList();
+    _registerEvent();
+  }
+
+  // 阀门控制
+  bool _isLoading = false; // 是否有人正在加载
+  bool _hasMore = true; // 是否还有更多数据
+
+  void _getGuessList() async {
+    // 阀门控制
+    if (_isLoading || !_hasMore) return;
+
+    _isLoading = true;
+
+    final response = await getGuessListAPI(_params);
+    // _list = response.items;
+    // 不是覆盖，是追加
+    _list.addAll(response.items);
+
+    _isLoading = false;
+
+    setState(() {});
+
+    // 判断是否还有下一页，是否还可以加载更多
+    if (response.pages <= _params["page"]) {
+      _hasMore = false;
+      return;
+    }
+    _params["page"]++;
+  }
+
+  void _registerEvent() {
+    _scrollController.addListener(() {
+      // 滚动事件
+      if (_scrollController.position.pixels ==
+          (_scrollController.position.maxScrollExtent - 50)) {
+        // 滚动到底部了
+        // 加载更多
+        _params["page"]++;
+        _getGuessList();
+      }
+    });
+  }
+
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: _scrollController,
       slivers: [
         SliverToBoxAdapter(child: _buildHeader()),
         SliverToBoxAdapter(child: _buildVipCard()),
         SliverToBoxAdapter(child: _buildQuickActions()),
         SliverToBoxAdapter(child: _buildOrderModule()),
+        // pinned 表示吸住的意思
+        SliverPersistentHeader(delegate: HmGuess(), pinned: true),
         // 猜你喜欢
+        HmMoreList(recommendList: _list),
       ],
     );
   }
