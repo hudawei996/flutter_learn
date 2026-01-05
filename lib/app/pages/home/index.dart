@@ -45,7 +45,10 @@ class _HomeViewState extends State<HomeView> {
       // 距离底部还有50的距离就可以开始了
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 50) {
+        print("滑动到底部了");
         // 加载下一页的数据
+        _getRecommendList();
+        setState(() {});
       }
     });
   }
@@ -149,7 +152,7 @@ class _HomeViewState extends State<HomeView> {
   Future<void> _onRefresh() async {
     _page = 1;
     _hasMore = true;
-    _isLoading = true;
+    _isLoading = false;
     _recommendList = [];
 
     await _getBannerList();
@@ -232,7 +235,7 @@ class _HomeViewState extends State<HomeView> {
     }
     _isLoading = true; // 先 占住位置
     int requestLimit = _page * 8;
-    _recommendList = await getRecommendListAPI({"limit": 10});
+    _recommendList = await getRecommendListAPI({"limit": requestLimit});
     _isLoading = false; // 松开位置
     // setState(() {});
 

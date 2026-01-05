@@ -15,7 +15,7 @@ class HttpConstants {
   static const String PREFERENCE_LIST = "/hot/preference";// 特惠推荐接口
   static const String IN_VOGUE_LIST = "/hot/inVogue";// 爆款推荐
   static const String ONE_STOP_LIST = "/hot/oneStop";// 一站买全
-  static const String RECOMMEND_LIST = "/hot/recommend";// 推荐列表
+  static const String RECOMMEND_LIST = "/home/recommend"; // 推荐列表
   static const String GUESS_LIST = "/hot/goods/guessLike";// 猜你喜欢
   // 返回的结构体是，GoodsItems类型
 
