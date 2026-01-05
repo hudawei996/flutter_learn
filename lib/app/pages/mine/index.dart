@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learn/app/components/home/HmMoreList.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../api/mine_api.dart';
 import '../../components/mine/HmGuess.dart';
@@ -213,8 +212,8 @@ class _MineViewState extends State<MineView> {
     );
   }
 
-  List<GoodDetailItem> _list = [];
-  Map<String, dynamic> _params = {"page": 1, "pageSize": 10};
+  final List<GoodDetailItem> _list = [];
+  final Map<String, dynamic> _params = {"page": 1, "pageSize": 10};
 
   @override
   void initState() {
