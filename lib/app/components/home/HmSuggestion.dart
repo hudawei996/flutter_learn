@@ -25,44 +25,46 @@ class _HmSuggestionState extends State<HmSuggestion> {
     // 注意这个还是需要return 漏了会报错
     // List.generate(list.length, (int index) {
     return List.generate(list.length, (int index) {
-      return Column(
-        children: [
-          // ClipRRect 可以包裹子元素 裁剪图片设置圆角
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              // 如果网络图片加载错误的时候，返回一个默认图片
-              errorBuilder: (context, error, stackTrace) {
-                return Image.asset(
-                  "lib/app/assets/home_cmd_inner.png",
-                  width: 100,
-                  height: 140,
-                  fit: BoxFit.cover,
-                );
-              },
-              list[index].picture,
-              width: 100,
-              height: 140,
-              fit: BoxFit.cover,
-            ),
-          ),
-          SizedBox(height: 10),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 240, 96, 12),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Text(
-              "¥${list[index].price}",
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
+      return Expanded(
+        child: Column(
+          children: [
+            // ClipRRect 可以包裹子元素 裁剪图片设置圆角
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                // 如果网络图片加载错误的时候，返回一个默认图片
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    "lib/app/assets/home_cmd_inner.png",
+                    // width: 100,
+                    height: 140,
+                    fit: BoxFit.cover,
+                  );
+                },
+                list[index].picture,
+                // width: 100,
+                height: 140,
+                fit: BoxFit.cover,
               ),
             ),
-          ),
-        ],
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 240, 96, 12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                "¥${list[index].price}",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ],
+        ),
       );
     });
   }
@@ -89,8 +91,10 @@ class _HmSuggestionState extends State<HmSuggestion> {
             Row(
               children: [
                 _buildLeft(),
+                SizedBox(width: 10),
                 Expanded(
                   child: Row(
+                    spacing: 10,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: _getChildrenList(),
                   ),
