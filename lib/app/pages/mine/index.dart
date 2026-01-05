@@ -278,6 +278,7 @@ class _MineViewState extends State<MineView> {
 
   void _getGuessList() async {
     // 阀门控制
+    // 有人正在加载 或没有下一页
     if (_isLoading || !_hasMore) return;
 
     _isLoading = true;
@@ -302,9 +303,10 @@ class _MineViewState extends State<MineView> {
   void _registerEvent() {
     _scrollController.addListener(() {
       // 滚动事件
-      if (_scrollController.position.pixels ==
+      if (_scrollController.position.pixels >=
           (_scrollController.position.maxScrollExtent - 50)) {
         // 滚动到底部了
+        print("我的页面滚动到底部了");
         // 加载更多
         _params["page"]++;
         _getGuessList();
