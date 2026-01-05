@@ -64,9 +64,12 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // SafeArea避开安全区域组件
-      body: SafeArea(
-        child: IndexedStack(index: _currentIndex, children: _getChildren()),
-      ),
+      body:
+      // SafeArea(
+      //   child: IndexedStack(index: _currentIndex, children: _getChildren()),
+      // ),
+      // 不使用安全区域，就会更像沉浸式，但是搜索框会和摄像头区域重合，所以还要给搜索框处理一下
+      IndexedStack(index: _currentIndex, children: _getChildren()),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: true,
         selectedItemColor: Colors.black,

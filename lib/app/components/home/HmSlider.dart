@@ -37,7 +37,10 @@ class _HmSliderState extends State<HmSlider> {
 
   Widget _getSearch() {
     return Positioned(
-      top: 10,
+      // 如果只是10，就会产生和手机摄像头区域重叠的问题
+      // top: 10,
+      // 安全区顶部的距离，让搜索框避开摄像头区域
+      top: MediaQuery.of(context).padding.top,
       left: 0,
       right: 0,
       child: Padding(
