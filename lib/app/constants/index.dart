@@ -4,6 +4,7 @@ class GlobalConstants {
   static const int TIME_OUT = 5000;// 超时时间
   static const String SUCCESS_CODE = "1";// 成功状态码
 
+  static const String TOKEN_KEY = "hm_shop_token";
 }
 
 
@@ -18,7 +19,8 @@ class HttpConstants {
   static const String GUESS_LIST = "/hot/goods/guessLike";// 猜你喜欢
   // 返回的结构体是，GoodsItems类型
 
-  static const String login = "/login";// 登录接口
+  static const String LOGIN = "/login";// 登录接口
+  static const String USER_PROFILE = "/member/profile";// 注册接口
 }
 
 

@@ -4,6 +4,6 @@ import '../constants/index.dart';
 import '../utils/DioRequest.dart';
 
 Future<UserInfo> loginAPI(Map<String,dynamic> data) async{
-  final response = await dioRequest.post(HttpConstants.login,data: data);
+  final response = await dioRequest.post(HttpConstants.LOGIN,data: data);
   return UserInfo.fromJSON(response);
 }
