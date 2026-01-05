@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learn/app/stores/TokenManager.dart';
 import 'package:flutter_learn/app/stores/UserController.dart';
+import 'package:flutter_learn/app/utils/LoadingDialog.dart';
 import 'package:flutter_learn/app/utils/toast_utils.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -211,16 +212,20 @@ class _LoginPageState extends State<LoginPage> {
       "password": _codeController.text,
     };
     try {
+      LoadingDialog.show(context, message: "努力登录中...");
       final response = await loginAPI(data);
       print(response);
 
       _userController.updateUserInfo(response);
-      tokenManager.setToken(response.token);// 写入持久化数据
+      tokenManager.setToken(response.token); // 写入持久化数据
 
       ToastUtils.showToast(context, "登录成功");
+
       Navigator.pop(context);
     } catch (e) {
       ToastUtils.showToast(context, (e as DioException).message ?? "登录异常");
+    } finally {
+      LoadingDialog.hide(context);
     }
   }
 }

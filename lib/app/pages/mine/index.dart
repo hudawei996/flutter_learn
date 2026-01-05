@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learn/app/components/home/HmMoreList.dart';
+import 'package:flutter_learn/app/stores/TokenManager.dart';
+import 'package:flutter_learn/app/view_models/user.dart';
 import 'package:get/get.dart';
 
 import '../../api/mine_api.dart';
@@ -20,6 +22,52 @@ class _MineViewState extends State<MineView> {
   // 已经在main中put了，所以这里就find就行了
   final UserController _userController = Get.find();
 
+  Widget _getLogout() {
+    return _userController.user.value.id.isNotEmpty
+        ? Expanded(
+            child: GestureDetector(
+              onTap: () {
+                // 弹出确认提示框
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('提示'),
+                      content: Text('确定要退出登录吗？'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('取消'),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            // 清除Getx 删除token
+                            await tokenManager.removeToken();
+                            // Getx内存数据
+                            _userController.updateUserInfo(
+                              UserInfo.fromJSON({}),
+                            );
+
+                            // 网络退出登录
+                            // await logout();
+                            // 跳转到登录页面
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('确认'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Text('退出登录', textAlign: TextAlign.end),
+            ),
+          )
+        : Text("");
+  }
+
   Widget _buildHeader() {
     return Container(
       decoration: BoxDecoration(
@@ -35,7 +83,9 @@ class _MineViewState extends State<MineView> {
           Obx(() {
             return GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/login');
+                if (_userController.user.value.account.isEmpty) {
+                  Navigator.pushNamed(context, '/login');
+                }
               },
               child: CircleAvatar(
                 radius: 26,
@@ -52,30 +102,29 @@ class _MineViewState extends State<MineView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    if (_userController.user.value.id.isEmpty) {
-                      Navigator.pushNamed(context, '/login');
-                    }
-                  },
-                  child: Obx(() {
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        (_userController.user.value.account.isNotEmpty
-                            ? _userController.user.value.account
-                            : '立即登录'),
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
+                Obx(() {
+                  return GestureDetector(
+                    onTap: () {
+                      if (_userController.user.value.account.isEmpty) {
+                        Navigator.pushNamed(context, '/login');
+                      }
+                    },
+                    child: Text(
+                      (_userController.user.value.account.isNotEmpty
+                          ? _userController.user.value.account
+                          : '立即登录'),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
                       ),
-                    );
-                  }),
-                ),
+                    ),
+                  );
+                }),
               ],
             ),
           ),
+          const SizedBox(width: 12),
+          Expanded(child: Obx(() => _getLogout())),
         ],
       ),
     );
