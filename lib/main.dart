@@ -109,34 +109,30 @@ class _MainPageState extends State<MainPage> {
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       home: Scaffold(
         appBar: AppBar(title: Text("头部区域")),
-        body: Container(
-          child: Center(
-            child:
-                // GestureDetector(
-                //   onTap: () {
-                //     print("点击了中间区域");
-                //   },
-                //   onDoubleTap: () {
-                //     print("双击了中间区域");
-                //   },
-                //   onLongPress: () {
-                //     print("长按了中间区域");
-                //   },
-                //   child: Text("中部区域"),
-                // ),
-                Container(
-                  child: Center(
-                    child: TextButton(
-                      onPressed: () {
-                        print("点击了中间区域");
-                      },
-                      child: Text("按钮"),
-                    ),
-                  ),
+        body: Center(
+          child:
+              // GestureDetector(
+              //   onTap: () {
+              //     print("点击了中间区域");
+              //   },
+              //   onDoubleTap: () {
+              //     print("双击了中间区域");
+              //   },
+              //   onLongPress: () {
+              //     print("长按了中间区域");
+              //   },
+              //   child: Text("中部区域"),
+              // ),
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    print("点击了中间区域");
+                  },
+                  child: Text("按钮"),
                 ),
-          ),
+              ),
         ),
-        bottomNavigationBar: Container(
+        bottomNavigationBar: SizedBox(
           height: 80,
           child: Center(child: Text("底部区域")),
         ),
