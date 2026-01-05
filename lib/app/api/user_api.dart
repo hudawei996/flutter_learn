@@ -3,7 +3,12 @@ import 'package:flutter_learn/app/view_models/user.dart';
 import '../constants/index.dart';
 import '../utils/DioRequest.dart';
 
-Future<UserInfo> loginAPI(Map<String,dynamic> data) async{
-  final response = await dioRequest.post(HttpConstants.LOGIN,data: data);
+Future<UserInfo> loginAPI(Map<String, dynamic> data) async {
+  final response = await dioRequest.post(HttpConstants.LOGIN, data: data);
+  return UserInfo.fromJSON(response);
+}
+
+Future<UserInfo> getUserInfoAPI() async {
+  final response = await dioRequest.get(HttpConstants.USER_PROFILE);
   return UserInfo.fromJSON(response);
 }

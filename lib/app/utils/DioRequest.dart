@@ -1,5 +1,6 @@
 // 基于Dio的网络请求工具类
 import 'package:dio/dio.dart';
+import 'package:flutter_learn/app/stores/TokenManager.dart';
 
 import '../constants/index.dart';
 
@@ -23,6 +24,11 @@ class DioRequest {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (request, handler) {
+          // 注入token request headers Authorization = "Bearer $token"
+          if (tokenManager.getToken().isNotEmpty) {
+            request.headers['Authorization'] =
+                'Bearer ${tokenManager.getToken()}';
+          }
           print("===== 打印网络请求URL =====  ${request.uri.toString()}");
           // 在发送请求之前做一些事情
           handler.next(request); // 继续发送请求

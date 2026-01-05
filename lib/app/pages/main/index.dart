@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learn/app/pages/cart/index.dart';
 import 'package:flutter_learn/app/pages/category/index.dart';
 import 'package:flutter_learn/app/pages/mine/index.dart';
+import 'package:flutter_learn/app/stores/TokenManager.dart';
+import 'package:flutter_learn/app/stores/UserController.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 
+import '../../api/user_api.dart';
 import '../home/index.dart';
 
 class MainPage extends StatefulWidget {
@@ -38,6 +43,22 @@ class _MainPageState extends State<MainPage> {
   ];
 
   int _currentIndex = 0;
+  
+  @override
+  void initState() {
+    super.initState();
+    // 初始化用户
+    _initUser();
+  }
+
+  final UserController _userController = Get.put(UserController());
+  void _initUser() async{
+    await tokenManager.init();
+    if(tokenManager.getToken().isNotEmpty){
+      _userController.updateUserInfo(await getUserInfoAPI());
+    }
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -78,4 +99,5 @@ class _MainPageState extends State<MainPage> {
   List<Widget> _getChildren() {
     return [HomeView(), CategoryView(), CartView(), MineView()];
   }
+
 }

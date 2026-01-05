@@ -20,7 +20,7 @@ class HttpConstants {
   // 返回的结构体是，GoodsItems类型
 
   static const String LOGIN = "/login";// 登录接口
-  static const String USER_PROFILE = "/member/profile";// 注册接口
+  static const String USER_PROFILE = "/member/profile";// 用户信息接口
 }
 
 

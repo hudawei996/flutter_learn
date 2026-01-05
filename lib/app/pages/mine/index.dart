@@ -17,7 +17,9 @@ class MineView extends StatefulWidget {
 
 class _MineViewState extends State<MineView> {
   // 引入UserController
-  final UserController _userController = Get.put(UserController());
+  // final UserController _userController = Get.put(UserController());
+  // 已经在main中put了，所以这里就find就行了
+  final UserController _userController = Get.find();
 
   Widget _buildHeader() {
     return Container(
