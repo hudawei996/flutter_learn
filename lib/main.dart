@@ -1,8 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_learn/animation/implicit_animations/animation_1.dart';
 import 'package:flutter_learn/app/routes/index.dart';
 import 'package:flutter_learn/base_learn/d2_21_29_main.dart';
 
+import 'animation/implicit_animations/animation_1.dart';
+import 'animation/implicit_animations/animation_2.dart';
+import 'animation/implicit_animations/animation_3.dart';
+import 'animation/implicit_animations/animation_4.dart';
+import 'animation/implicit_animations/animation_5.dart';
 import 'base_learn/d2_31_father_child.dart';
 import 'base_learn/d2_32_child_father.dart';
 import 'base_learn/d2_3456_dio_use.dart';
@@ -33,8 +39,14 @@ void main(List<String> args) {
 
 
 
-  runApp(getRootWidget());
+  // runApp(getRootWidget());
 
+  // 动画演示
+  // runApp(Animation1());
+  // runApp(Animation2());
+  // runApp(Animation3());
+  // runApp(Animation4());
+  runApp(Animation5());
 
 }
 
