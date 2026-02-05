@@ -1,14 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_learn/animation/implicit_animations/animation_1.dart';
+import 'package:flutter_learn/animation/base_animations/explicit_animations/mine/animation_9.dart';
+import 'package:flutter_learn/animation/base_animations/implicit_animations/animation_1.dart';
 import 'package:flutter_learn/app/routes/index.dart';
 import 'package:flutter_learn/base_learn/d2_21_29_main.dart';
 
-import 'animation/implicit_animations/animation_1.dart';
-import 'animation/implicit_animations/animation_2.dart';
-import 'animation/implicit_animations/animation_3.dart';
-import 'animation/implicit_animations/animation_4.dart';
-import 'animation/implicit_animations/animation_5.dart';
+import 'animation/base_animations/explicit_animations/mine/animation_9.dart';
+import 'animation/base_animations/explicit_animations/mine/animation_6.dart';
+import 'animation/base_animations/explicit_animations/mine/animation_7.dart';
+import 'animation/base_animations/explicit_animations/mine/animation_8.dart';
+import 'animation/base_animations/implicit_animations/animation_1.dart';
+import 'animation/base_animations/implicit_animations/animation_2.dart';
+import 'animation/base_animations/implicit_animations/animation_3.dart';
+import 'animation/base_animations/implicit_animations/animation_4.dart';
+import 'animation/base_animations/implicit_animations/animation_5.dart';
 import 'base_learn/d2_31_father_child.dart';
 import 'base_learn/d2_32_child_father.dart';
 import 'base_learn/d2_3456_dio_use.dart';
@@ -46,7 +51,11 @@ void main(List<String> args) {
   // runApp(Animation2());
   // runApp(Animation3());
   // runApp(Animation4());
-  runApp(Animation5());
+  // runApp(Animation5());
+  // runApp(Animation6());
+  // runApp(Animation7());
+  // runApp(Animation8());
+  runApp(Animation9());
 
 }
 
