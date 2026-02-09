@@ -1,0 +1,22 @@
+IT营 itying 大地老师的视频
+https://www.bilibili.com/video/BV1vh411P7Tu?spm_id_from=333.788.player.switch&vd_source=e10f137a63ff65947d019d16bb78ea8d&p=3
+
+1隐式动画：隐藏了动画细节设置，称为隐式动画，都是一些可以自动把状态参数变化，变成动画的《容器》
+    1.1 AnimatedContainer
+    1.2 AnimatedOpacity AnimatedPadding
+    1.3 AnimatedPositioned
+    1.4 AnimatedDefaultTextStyle
+    1.5 AnimatedSwitcher
+2显式动画：state类一定要继承 SingleTickerProviderStateMixin，要使用到 AnimationController来控制动画
+    2.1 RotationTransition
+    2.2 FadeTransition
+    2.3 ScaleTransition
+    2.4 SlideTransition
+3自定义动画：
+    3.1 自定义隐式动画：TweenAnimationBuilder
+        3.1.1 不需要控制
+
+    3.2 自定义显示动画：AnimatedBuilder
+        3.2.1 需要控制，要继承
+        SingleTickerProviderStateMixin
+        或 TickerProviderStateMixin
