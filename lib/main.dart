@@ -10,6 +10,8 @@ import 'package:flutter_learn/animation/interleaved_animation/mine/animation_14.
 import 'package:flutter_learn/app/routes/index.dart';
 import 'package:flutter_learn/base_learn/d2_21_29_main.dart';
 
+import 'animation/animation_heor/animation_hero.dart';
+import 'animation/animation_heor/routers.dart';
 import 'animation/base_animations/explicit_animations/mine/animation_9.dart';
 import 'animation/base_animations/explicit_animations/mine/animation_6.dart';
 import 'animation/base_animations/explicit_animations/mine/animation_7.dart';
@@ -19,7 +21,7 @@ import 'animation/base_animations/implicit_animations/animation_2.dart';
 import 'animation/base_animations/implicit_animations/animation_3.dart';
 import 'animation/base_animations/implicit_animations/animation_4.dart';
 import 'animation/base_animations/implicit_animations/animation_5.dart';
-import 'animation/interleaved_animation/mine/animation_15.dart';
+import 'animation/self_made_animation/animation_15.dart';
 import 'base_learn/d2_31_father_child.dart';
 import 'base_learn/d2_32_child_father.dart';
 import 'base_learn/d2_3456_dio_use.dart';
@@ -67,9 +69,30 @@ void main(List<String> args) {
   // runApp(Animation12());
   // runApp(Animation13());
   // runApp(Animation14());
-  runApp(Animation15());
+  // runApp(Animation15());
+  runApp(MyAppHero());
 
 }
+
+
+class MyAppHero extends StatelessWidget {
+  const MyAppHero({Key? key}) : super(key: key);
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: '/',
+      onGenerateRoute: onGenerateRoute,
+    );
+  }
+}
+
+
 
 // class MainPage extends StatelessWidget {
 //   const MainPage({super.key});
