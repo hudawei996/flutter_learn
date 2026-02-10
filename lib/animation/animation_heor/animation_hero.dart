@@ -81,17 +81,24 @@ class _AnimationHeroState extends State<AnimationHero> {
   // 自定义 两个图标切换动画
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisSpacing: 10.0,
-      //水平子 widget之间距离
-      mainAxisSpacing: 10.0,
-      // 垂直子 widget 之间距离,
-      padding: EdgeInsets.all(10.0),
-      crossAxisCount: 2,
-      // 一行的widget数量
-      childAspectRatio: 0.7,
-      //宽高比
-      children: _getListData(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Image List"),
+      ),
+      body: GridView.count(
+        //水平子 widget之间距离
+        crossAxisSpacing: 10.0,
+        // 垂直子 widget 之间距离,
+        mainAxisSpacing: 10.0,
+
+        padding: EdgeInsets.all(10.0),
+        // 一行的widget数量
+        crossAxisCount: 2,
+        //宽高比
+        // childAspectRatio: 0.7,
+
+        children: _getListData(),
+      ),
     );
   }
 }

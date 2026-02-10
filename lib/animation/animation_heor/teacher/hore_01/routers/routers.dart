@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_learn/animation/animation_heor/teacher/hore_01/pages/tabs.dart';
-
-import 'animation_hero.dart';
-import 'hero_page.dart';
+import '../pages/tabs.dart';
+import '../pages/hero.dart';
 
 final Map<String,Function> routes = {
-  // '/': (contxt) => const Tabs(),
-  '/': (contxt) => const AnimationHero(),
-  '/hero': (contxt,{arguments}) => HeroPage(arguments:arguments),
+  '/': (contxt) => const Tabs(), 
+  '/hero': (contxt,{arguments}) => HeroPage(arguments:arguments), 
 };
 
 var onGenerateRoute = (RouteSettings settings) {
@@ -15,15 +12,14 @@ var onGenerateRoute = (RouteSettings settings) {
   final String? name = settings.name;
   final Function? pageContentBuilder = routes[name];
   if (pageContentBuilder != null) {
-    // 参数不为空，就带上
     if (settings.arguments != null) {
       final Route route = CupertinoPageRoute(
           builder: (context) =>
               pageContentBuilder(context, arguments: settings.arguments));
       return route;
     } else {
-      // 没有参数就不带了
-      final Route route = CupertinoPageRoute(builder: (context) => pageContentBuilder(context));
+      final Route route =
+          CupertinoPageRoute(builder: (context) => pageContentBuilder(context));
       return route;
     }
   }
