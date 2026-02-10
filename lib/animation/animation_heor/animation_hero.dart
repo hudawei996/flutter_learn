@@ -48,7 +48,10 @@ class _AnimationHeroState extends State<AnimationHero> {
           Navigator.pushNamed(
             context,
             "/hero",
-            arguments: {'imageUrl': value['imageUrl']},
+            arguments: {
+              'imageUrl': value['imageUrl'],
+              'imageUrlList': listDta.map((e) => e['imageUrl']).toList(),
+            },
           );
         },
         child: Container(
